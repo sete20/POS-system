@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html >
+<html dir="{{ LaravelLocalization::getCurrentLocaleDirection() }}" >
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -117,7 +117,9 @@
                             <li class="header">You have 4 messages</li>
                             <li>
                                 <!-- inner menu: contains the actual data -->
+                                
                                 <ul class="menu">
+                                
                                     <li><!-- start message -->
                                         <a href="#">
                                             <div class="pull-left">
@@ -147,6 +149,7 @@
                             <span class="label label-warning">10</span>
                         </a>
                         <ul class="dropdown-menu">
+                        
                             <li class="header">You have 10 notifications</li>
                             <li>
                                 {{--<!-- inner menu: contains the actual data -->--}}
@@ -166,8 +169,19 @@
 
                     {{--<!-- Tasks: style can be found in dropdown.less -->--}}
                     <li class="dropdown tasks-menu">
+                    
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-flag-o"></i></a>
                         <ul class="dropdown-menu">
+                        {{--<!-- inner menu: contains the actual data -->--}}
+                                <ul class="menu">
+                                    @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                                        <li>
+                                            <a rel="alternate" hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
+                                                {{ $properties['native'] }}
+                                            </a>
+                                        </li>
+                                    @endforeach
+                                </ul>
                             <li>
                                 {{--<!-- inner menu: contains the actual data -->--}}
                                 <ul class="menu">

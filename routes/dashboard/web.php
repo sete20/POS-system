@@ -10,12 +10,20 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::prefix('dashboard')->name('dashboard.')->group( function () {
-    
-
-route::get('/index','dashboardcontroller@index')->name('index');
-
-
+Route::group(
+        [
+ 'prefix' => LaravelLocalization::setLocale(),
+'middleware' => 
+[ 
+'localeSessionRedirect', 
+'localizationRedirect', 
+'localeViewPath' 
+]]
+, function()
+{ 
+  Route::prefix('dashboard')->name('dashboard.')->group( function ()
+   {
+  route::get('/index','dashboardcontroller@index')->name('index');
+   });
 
 });//end of dashboard routes
