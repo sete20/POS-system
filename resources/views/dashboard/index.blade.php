@@ -6,7 +6,7 @@
 
         <section class="content-header">
 
-            <h1>@lang('site.categories')</h1>
+            <h1>@lang('site.dashboard')</h1>
 
             <ol class="breadcrumb">
                
