@@ -24,8 +24,11 @@ Route::group(
   Route::prefix('dashboard')->name('dashboard.')->middleware(['auth'])->group( function ()
    {
   route::get('/index','dashboardcontroller@index')->name('index');
-
+//users route
    route::resource('users','UserController')->except(['show']);
+   
+   //category routes
+   route::resource('categories','CategoryController')->except(['show']);
    });
 
 });//end of dashboard routes
