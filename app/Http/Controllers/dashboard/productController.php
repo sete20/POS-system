@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\dashboard;
-
+use App\Category;
 use App\product;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -13,74 +13,49 @@ class productController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index( request $request)
     {
-        //
-    }
+        $categories = Category::all();
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+        $products = Product::paginate(5);
+
+        return view('dashboard.products.index', compact('categories', 'products'));
+
+    }//end of index
+
+ 
     public function create()
     {
-        //
-    }
+        return view('dashboard.categories.index');
+    }//end of create
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    
     public function store(Request $request)
     {
         //
-    }
+    }//end of store
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\product  $product
-     * @return \Illuminate\Http\Response
-     */
     public function show(product $product)
     {
         //
-    }
+    }//end of show
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\product  $product
-     * @return \Illuminate\Http\Response
-     */
     public function edit(product $product)
     {
         //
-    }
+    }//end of edit
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\product  $product
-     * @return \Illuminate\Http\Response
-     */
+    
     public function update(Request $request, product $product)
     {
         //
-    }
+    } //end of update
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\product  $product
-     * @return \Illuminate\Http\Response
-     */
+
     public function destroy(product $product)
     {
         //
-    }
-}
+    } //end of destroy
+
+
+}//end of controller

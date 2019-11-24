@@ -14,14 +14,15 @@ class CreateProductsTable extends Migration
     public function up()
     {
         Schema::create('products', function (Blueprint $table) {
-            $table->bigIncrements('id');  
+            $table->increments('id');
+            $table->integer('category_id')->unsigned();
             $table->string('image')->default('default.png');
-            $table->double('purchase_price',8,2);  
-            $table->double('sale_price',8,2);
-            $table->integr('stock');     
-            $table->integr('catogry_id');
+            $table->double('purchase_price', 8, 2);
+            $table->double('sale_price', 8, 2);
+            $table->integer('stock');
             $table->timestamps();
-            $table->foreign('catogry_id')->referenes('id')->on('categories')->onDelete('cascade');
+
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
         });
     }
 

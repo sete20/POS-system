@@ -29,6 +29,8 @@ Route::group(
    
    //category routes
    route::resource('categories','CategoryController')->except(['show']);
+      //category routes
+      route::resource('products','productController')->except(['show']);
    });
 
 });//end of dashboard routes
