@@ -17,8 +17,9 @@ class CreateProductTranslationsTable extends Migration
             $table->increments('id');
             $table->integer('product_id')->unsigned();
             $table->string('name');
-            $table->string('locale')->index();
             $table->text('description');
+            $table->string('locale')->index();
+
             $table->unique(['product_id', 'locale']);
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
         });

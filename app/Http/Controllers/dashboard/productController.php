@@ -2,18 +2,15 @@
 
 namespace App\Http\Controllers\dashboard;
 use App\Category;
+use Intervention\Image\Facades\Image;
+use Illuminate\Validation\Rule;
 use App\product;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class productController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index( request $request)
+    public function index(Request $request)
     {
         $categories = Category::all();
 
@@ -23,39 +20,68 @@ class productController extends Controller
 
     }//end of index
 
- 
     public function create()
     {
-        return view('dashboard.categories.index');
+        $categories = Category::all();
+        return view('dashboard.products.create', compact('categories'));
+
     }//end of create
 
-    
     public function store(Request $request)
     {
-        //
+
+        $rules = ['category_id' => 'required' ];
+
+ 
+        foreach(config('translatable.locales')  as $locale){
+            $rules += [$locale . '.name' => 'required|unique:product_translations,name'];
+            $rules += [$locale . '.description' => 'required'];
+        }
+        
+        $rules += [
+            'purchase_price' => 'required',
+            'sale_price' => 'required',
+            'stock' => 'required',
+            'Expiration_date'=> 'required',
+        ];
+
+        $request->validate($rules);
+
+        $request_data = $request->all();
+
+        if ($request->image) {
+
+            Image::make($request->image)
+                ->resize(300, null, function ($constraint) {
+                    $constraint->aspectRatio();
+                })
+                ->save(public_path('uploads/product_images/' . $request->image->hashName()));
+
+            $request_data['image'] = $request->image->hashName();
+
+        }//end of if
+
+        Product::create($request_data);
+        session()->flash('success', __('site.added_successfully'));
+        return redirect()->route('dashboard.products.index');
+
     }//end of store
 
-    public function show(product $product)
+    public function edit(Product $product)
     {
-        //
-    }//end of show
 
-    public function edit(product $product)
-    {
-        //
+
     }//end of edit
 
-    
-    public function update(Request $request, product $product)
+    public function update(Request $request, Product $product)
     {
-        //
-    } //end of update
+  
 
+    }//end of update
 
-    public function destroy(product $product)
+    public function destroy(Product $product)
     {
-        //
-    } //end of destroy
 
 
-}//end of controller
+    }//end of destroy
+}

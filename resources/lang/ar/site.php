@@ -67,7 +67,8 @@ return [
     'price' => 'السعر',
     'sale_price' => 'سعر البيع',
     'stock' => 'المخزن',
-    'profit_percent' => 'المكسب',
+    'Expiration_date'=>'تاريخ انتهاء الصلاحية',
+    // 'profit_percent' => 'المكسب',
 
     'ar' => [
         'name' => 'الاسم بالغه العربيه',
