@@ -5,6 +5,7 @@ use App\Category;
 use Intervention\Image\Facades\Image;
 use Illuminate\Validation\Rule;
 use App\product;
+use Storage;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -22,7 +23,7 @@ return $q->where('category_id',$request->category_id);
 
     })->latest()->paginate(5);
 
-        return view('dashboard.products.index', compact('categories', 'products'));
+  return  view('dashboard.products.index', compact('categories', 'products'));
 
     }//end of index
 
@@ -76,7 +77,7 @@ return $q->where('category_id',$request->category_id);
     public function edit(Product $product)
     {
         $categories = Category::all();
-        return view('dashboard.products.edit', compact('categories'));
+        return view('dashboard.products.edit', compact('categories', 'product'));
 
     }//end of edit
 
@@ -86,7 +87,7 @@ return $q->where('category_id',$request->category_id);
 
  
         foreach(config('translatable.locales')  as $locale){
-            $rules += [$locale . '.name' => 'required|unique:product_translations,name'];
+            $rules += [$locale . '.name' =>['required',rule::unique('product_translations','name')->ignore($product->id,'product_id')]];
             $rules += [$locale . '.description' => 'required'];
         }
         
@@ -103,6 +104,12 @@ return $q->where('category_id',$request->category_id);
 
         if ($request->image) {
 
+            if ($product->image != 'default.png') {
+
+                Storage::disk('public_uploads')->delete('/product_images/' . $product->image);
+                    
+            }//end of if
+
             Image::make($request->image)
                 ->resize(300, null, function ($constraint) {
                     $constraint->aspectRatio();
@@ -112,16 +119,23 @@ return $q->where('category_id',$request->category_id);
             $request_data['image'] = $request->image->hashName();
 
         }//end of if
-
-        Product::update($request_data);
+        
+        $product->update($request_data);
         session()->flash('success', __('site.updated_successfully'));
         return redirect()->route('dashboard.products.index');
-
 
     }//end of update
 
     public function destroy(Product $product)
     {
-      
+        if ($product->image != 'default.png') {
+
+            Storage::disk('public_uploads')->delete('/product_images/' . $product->image);
+
+        }//end of if
+
+        $product->delete();
+        session()->flash('success', __('site.deleted_successfully'));
+        return redirect()->route('dashboard.products.index');
     }//end of destroy
 }

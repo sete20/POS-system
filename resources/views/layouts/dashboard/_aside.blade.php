@@ -27,10 +27,9 @@
            @if(auth()->user()->haspermission('read_categories'))
            <li><a href=" {{route('dashboard.categories.index')}}"><i class="fa fa-users"></i><span>@lang('site.categories')</span></a></li>
            @endif
-           @if(auth()->user()->haspermission('read_users'))
-            <li><a href=" {{route('dashboard.users.create')}}"><i class="fa  fa-plus-square-o"></i><span>@lang('site.create')</span></a></li>
+           @if (auth()->user()->hasPermission('read_clients'))
+                <li><a href="{{ route('dashboard.clients.index') }}"><i class="fa fa-id-badge"></i><span>@lang('site.clients')</span></a></li>
             @endif
-           
            <li class="treeview">
           <a href="#">
            <i class="fa fa-pie-chart"></i>

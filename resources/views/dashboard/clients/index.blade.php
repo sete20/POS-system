@@ -6,11 +6,11 @@
 
         <section class="content-header">
 
-            <h1>@lang('site.products')</h1>
+            <h1>@lang('site.clients')</h1>
 
             <ol class="breadcrumb">
-               
-                <li class="active">@lang('site.products')</li>
+              
+                <li class="active">@lang('site.clients')</li>
             </ol>
         </section>
 
@@ -20,9 +20,9 @@
 
                 <div class="box-header with-border">
 
-                    <h3 class="box-title" style="margin-bottom: 15px">@lang('site.products') <small>{{ $products->total() }}</small></h3>
+                    <h3 class="box-title" style="margin-bottom: 15px">@lang('site.clients') <small>{{ $clients->total() }}</small></h3>
 
-                    <form action="{{ route('dashboard.products.index') }}" method="get">
+                    <form action="{{ route('dashboard.clients.index') }}" method="get">
 
                         <div class="row">
 
@@ -31,18 +31,9 @@
                             </div>
 
                             <div class="col-md-4">
-                                <select name="category_id" class="form-control">
-                                    <option value="">@lang('site.all_categories')</option>
-                                    @foreach ($categories as $category)
-                                        <option value="{{ $category->id }}" {{ request()->category_id == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            
-                            <div class="col-md-4">
                                 <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i> @lang('site.search')</button>
-                                @if (auth()->user()->hasPermission('create_products'))
-                                    <a href="{{ route('dashboard.products.create') }}" class="btn btn-primary"><i class="fa fa-plus"></i> @lang('site.add')</a>
+                                @if (auth()->user()->hasPermission('create_clients'))
+                                    <a href="{{ route('dashboard.clients.create') }}" class="btn btn-primary"><i class="fa fa-plus"></i> @lang('site.add')</a>
                                 @else
                                     <a href="#" class="btn btn-primary disabled"><i class="fa fa-plus"></i> @lang('site.add')</a>
                                 @endif
@@ -55,7 +46,7 @@
 
                 <div class="box-body">
 
-                    @if ($products->count() > 0)
+                    @if ($clients->count() > 0)
 
                         <table class="table table-hover">
 
@@ -63,40 +54,35 @@
                             <tr>
                                 <th>#</th>
                                 <th>@lang('site.name')</th>
-                                <th>@lang('site.description')</th>
-                                <th>@lang('site.category')</th>
-                                <th>@lang('site.image')</th>
-                                <th>@lang('site.purchase_price')</th>
-                                <th>@lang('site.sale_price')</th>
-                                <th>@lang('site.stock')</th>
-                                <th>@lang('site.Expiration_date')</th>
-                                <th>@lang('site.profit_percent') %</th>
+                                <th>@lang('site.phone')</th>
+                                <th>@lang('site.address')</th>
+                                <th>@lang('site.add_order')</th>
                                 <th>@lang('site.action')</th>
-                                
                             </tr>
                             </thead>
                             
                             <tbody>
-                            @foreach ($products as $index=>$product)
+                            @foreach ($clients as $index=>$client)
                                 <tr>
                                     <td>{{ $index + 1 }}</td>
-                                    <td>{{ $product->name }}</td>
-                                    <td>{!! $product->description !!}</td>
-                                    <td>{{ $product->category->name }}</td>
-                                    <td><img src="{{ $product->image_path }}" style="width: 50px; border-radius:60px;"  class="img-thumbnail" alt=""></td>
-                                    <td>{{ $product->purchase_price }}</td>
-                                    <td>{{ $product->sale_price }}</td>
-                                    <td>{{ $product->stock }}</td>
-                                    <td>{{ $product->Expiration_date }}</td>
-                                    <td>{{ $product->profit_percent }} %</td>
+                                    <td>{{ $client->name }}</td>
+                                    <td>{{implode($client->phone,'-' ) }}</td>
+                                    <td>{{ $client->address }}</td>
                                     <td>
-                                        @if (auth()->user()->hasPermission('update_products'))
-                                            <a href="{{ route('dashboard.products.edit', $product->id) }}" class="btn btn-info btn-sm"><i class="fa fa-edit"></i> @lang('site.edit')</a>
+                                        @if (auth()->user()->hasPermission('create_orders'))
+                                            <a href="{{ route('dashboard.clients.orders.create', $client->id) }}" class="btn btn-primary btn-sm">@lang('site.add_order')</a>
+                                        @else
+                                            <a href="#" class="btn btn-primary btn-sm disabled">@lang('site.add_order')</a>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @if (auth()->user()->hasPermission('update_clients'))
+                                            <a href="{{ route('dashboard.clients.edit', $client->id) }}" class="btn btn-info btn-sm"><i class="fa fa-edit"></i> @lang('site.edit')</a>
                                         @else
                                             <a href="#" class="btn btn-info btn-sm disabled"><i class="fa fa-edit"></i> @lang('site.edit')</a>
                                         @endif
-                                        @if (auth()->user()->hasPermission('delete_products'))
-                                        <form action="{{ route('dashboard.products.destroy', $product->id) }}" method="post" style="display: inline-block">
+                                        @if (auth()->user()->hasPermission('delete_clients'))
+                                            <form action="{{ route('dashboard.clients.destroy', $client->id) }}" method="post" style="display: inline-block">
                                                 {{ csrf_field() }}
                                                 {{ method_field('delete') }}
                                                 <button type="submit" class="btn btn-danger delete btn-sm"><i class="fa fa-trash"></i> @lang('site.delete')</button>
@@ -112,7 +98,7 @@
 
                         </table><!-- end of table -->
                         
-                        {{ $products->appends(request()->query())->links() }}
+                        {{ $clients->appends(request()->query())->links() }}
                         
                     @else
                         
