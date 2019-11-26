@@ -70,7 +70,9 @@
                                 <th>@lang('site.sale_price')</th>
                                 <th>@lang('site.stock')</th>
                                 <th>@lang('site.Expiration_date')</th>
+                                <th>@lang('site.profit_percent') %</th>
                                 <th>@lang('site.action')</th>
+                                
                             </tr>
                             </thead>
                             
@@ -81,11 +83,12 @@
                                     <td>{{ $product->name }}</td>
                                     <td>{!! $product->description !!}</td>
                                     <td>{{ $product->category->name }}</td>
-                                    <td><img src="{{ $product->image_path }}" style="width: 80px; border-radius:60px;"  class="img-thumbnail" alt=""></td>
+                                    <td><img src="{{ $product->image_path }}" style="width: 50px; border-radius:60px;"  class="img-thumbnail" alt=""></td>
                                     <td>{{ $product->purchase_price }}</td>
                                     <td>{{ $product->sale_price }}</td>
                                     <td>{{ $product->stock }}</td>
                                     <td>{{ $product->Expiration_date }}</td>
+                                    <td>{{ $product->profit_percent }} %</td>
                                     <td>
                                         @if (auth()->user()->hasPermission('update_products'))
                                             <a href="{{ route('dashboard.products.edit', $product->id) }}" class="btn btn-info btn-sm"><i class="fa fa-edit"></i> @lang('site.edit')</a>

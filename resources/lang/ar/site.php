@@ -53,7 +53,7 @@ return [
     'all_categories' => 'كل الاقسام',
     'name' => 'الاسم',
     'description' => 'الوصف',
-    'products_count' => 'عدد الامنتجات',
+    'products_count' => 'عدد المنتجات',
     'related_products' => 'المنتجات المرتبطه',
     'category' => 'القسم',
     'show_products' => 'عرض المنتجات',
@@ -66,9 +66,9 @@ return [
     'purchase_price' => 'سعر الشراء',
     'price' => 'السعر',
     'sale_price' => 'سعر البيع',
-    'stock' => 'المخزن',
+    'stock' => 'الكمية المخزنة',
     'Expiration_date'=>'تاريخ انتهاء الصلاحية',
-    // 'profit_percent' => 'المكسب',
+    'profit_percent' => 'نسبة الربح',
 
     'ar' => [
         'name' => 'الاسم بالغه العربيه',
