@@ -13,7 +13,7 @@
         </div>
         <ul class="sidebar-menu" data-widget="tree">
            <li>
-           <a href="{{route('dashboard.index')}}">
+           <a href="{{route('dashboard.welcome')}}">
            <i class="fa fa-dashboard"></i><span>
            @lang('site.dashboard')</span></a></li>
            {{----}}

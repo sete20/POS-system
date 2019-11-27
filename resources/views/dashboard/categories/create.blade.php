@@ -7,7 +7,7 @@
             <h1>@lang('site.create')</h1>
 
             <ol class="breadcrumb">
-    <li><a href="{{route('dashboard.index')}}"><i class="fa fa-dashboard"></i>@lang('site.dashboard')</a></li>
+    <li><a href="{{route('dashboard.welcome')}}"><i class="fa fa-dashboard"></i>@lang('site.dashboard')</a></li>
     <li><a href="{{route('dashboard.categories.index')}}"><i class="fa fa-categories"></i>@lang('site.categories')</a></li>
     <li><a href="{{route('dashboard.categories.create')}}"><i class="fa fa-plus"></i>@lang('site.create')</a></li>
 

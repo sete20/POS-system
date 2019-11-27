@@ -23,7 +23,7 @@ Route::group(
 { 
   Route::prefix('dashboard')->name('dashboard.')->middleware(['auth'])->group( function ()
    {
-  route::get('/index','dashboardcontroller@index')->name('index');
+  route::get('/','welcomecontroller@index')->name('welcome');
 //users route
    route::resource('users','UserController')->except(['show']);
    
@@ -33,7 +33,7 @@ Route::group(
       route::resource('products','productController')->except(['show']);
       //Client routes
       Route::resource('clients', 'ClientController')->except(['show']);
-
+      Route::resource('clients.orders', 'Client\OrderController')->except(['show']);
       
    });
 

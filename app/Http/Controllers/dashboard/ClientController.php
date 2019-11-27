@@ -11,7 +11,9 @@ class ClientController extends Controller
     public function index(request $request)
     {
        $clients=client::when($request->search,function ($q)use ($request){
-        return $q->where('name','like','%'.$request->search.'%')->orwhere('phone','like','%'.$request->search.'%');
+        return $q->where('name','like','%'.$request->search.'%')
+        ->orwhere('phone','like','%'.$request->search.'%')
+        ->orwhere('address','like','%'.$request->search.'%');
          })->latest()->paginate(5);
        return view('dashboard.clients.index',compact('clients'));
     }//end of index function

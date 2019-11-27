@@ -7,7 +7,7 @@
             <h1>@lang('site.products')</h1>
 
             <ol class="breadcrumb">
-             
+            <li><a href="{{route('dashboard.welcome')}}"><i class="fa fa-dashboard"></i>@lang('site.dashboard')</a></li>
                 <li><a href="{{ route('dashboard.products.create') }}"> @lang('site.products')</a></li>
                 <li class="active">@lang('site.add')</li>
             </ol>
