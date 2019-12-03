@@ -49,7 +49,7 @@ return $q->where('category_id',$request->category_id);
             'purchase_price' => 'required',
             'sale_price' => 'required',
             'stock' => 'required',
-            'Expiration_date'=> 'required',
+            'Expiration_date'=> 'required|date|after:start_date',
         ];
 
         $request->validate($rules);

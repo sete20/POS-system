@@ -29,5 +29,22 @@ class OrderController extends Controller
         return view('dashboard.orders._products', compact('order', 'products'));
 
     }//end of products
+    public function destroy(Order $order )
+    {
+        //لاسترجاع الكمية 
+       
+        foreach ($order->products as $product) {
+
+            $product->update([
+                'stock' => $product->stock + $product->pivot->quantity
+            ]);
+
+        }//end of for each
+
+        $order->delete();
+        session()->flash('success', __('site.deleted_successfully'));
+        return redirect()->route('dashboard.orders.index');
+
+    }//end of products
    
 }
