@@ -7,9 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     use \Dimsav\Translatable\Translatable;
-protected $fillable = [
-    'Expiration_date','category_id','purchase_price','sale_price','stock','image',
-    ];
+// protected $fillable = [
+//     'Expiration_date','category_id','purchase_price','sale_price','stock','image',
+//     ];
     protected $guarded = ['id'];
 
     public $translatedAttributes = ['name', 'description'];

@@ -87,7 +87,7 @@
                                     <td>{{ $product->purchase_price }}</td>
                                     <td>{{ $product->sale_price }}</td>
                                     <td>{{ $product->stock }}</td>
-                                    <td>{{ $product->Expiration_date }}</td>
+                                    <td>{{  date('y-m-d', strtotime($product->Expiration_date))}}</td>
                                     <td>{{ $product->profit_percent }} %</td>
                                     <td>
                                         @if (auth()->user()->hasPermission('update_products'))

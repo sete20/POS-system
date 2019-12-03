@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\dashboard;
 use Intervention\Image\Facades\Image;
+use Illuminate\Validation\Rule;
 use App\user;
 use Storage;
 use Illuminate\Http\Request;

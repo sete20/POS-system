@@ -38,7 +38,7 @@ return [
         'sqlite' => [
             'driver' => 'sqlite',
             'url' => env('DATABASE_URL'),
-            'database' => dirname(__DIR__).'/database/database.sqlite',
+            'database' => dirname(__DIR__).'/database/mypos.sqlite',
             'prefix' => '',
           
         ],
