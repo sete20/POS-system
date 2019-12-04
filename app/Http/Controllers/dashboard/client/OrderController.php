@@ -29,6 +29,7 @@ class OrderController extends Controller
        'products'=>'required|array',
 
        ]);
+      
        
        $this->attach_order($request, $client);
         

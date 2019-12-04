@@ -19,7 +19,7 @@ class CreateProductsTable extends Migration
             $table->string('image')->default('default.png');
             $table->double('purchase_price', 8, 2);
             $table->double('sale_price', 8, 2);
-            $table->integer('stock');
+            $table->integer('stock')->unsigned();
             $table->date('Expiration_date');
             $table->timestamps();
             
